@@ -24,13 +24,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log("Retrieved token:", token); // Логирование токена
+
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       axios.get('https://dummyjson.com/auth/users')
         .then(response => {
           setUser(response.data);
           setIsAuthenticated(true);
+          console.log(response.data)
+          console.log(isAuthenticated)
         })
         .catch(error => {
           console.error("Error during token validation:", error); // Логирование ошибки
@@ -48,7 +50,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       .then(response => {
         const token = response.data.token;
         localStorage.setItem('token', token);
-        console.log("Stored token:", token); // Логирование сохраненного токена
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setUser(response.data.user);
         setIsAuthenticated(true);
