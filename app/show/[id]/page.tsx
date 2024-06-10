@@ -49,9 +49,6 @@ const PostPage = async ({ params }: { params: { id: string } }) => {
                   </div>
                 ))}
               </div>
-              <div>
-                <img src={`https://dummyjson.com/icon/abc${post.id}`}/>
-              </div>
             </div>
           </section>
         </div>

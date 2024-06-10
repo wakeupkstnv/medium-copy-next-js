@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Spinner from '../components/Animations/Spinner';
+import { ToastContainer, ToastContent } from 'react-toastify';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         localStorage.removeItem('user');
         setIsAuthenticated(false);
         router.push('/login');
+        <ToastContainer />
       }
     } else {
       router.push('/login');
@@ -57,6 +59,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(user);
         setIsAuthenticated(true);
         router.push('/');
+        
       })
       .catch(error => {
         console.error("Login error:", error);
