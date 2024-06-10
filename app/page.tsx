@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import Navbar from './components/layout/Navbar';
 import CardPost from './components/Card/CardPost';
 import AsideCard from './components/Card/AsideCard';
 import Spinner from './components/Animations/Spinner';
 import { Post } from './types';
-import apiClient from './utils/axios';
-import { useAuth } from './context/AuthContext';
 
 const getElementByTag = (posts: Post[], tag: string): Post[] => {
   return posts.filter(post => post.tags.includes(tag));
@@ -17,15 +15,9 @@ const getElementByTag = (posts: Post[], tag: string): Post[] => {
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { isAuthenticated } = useAuth();
-  const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/login');
-      return;
-    }
-    apiClient.get('auth/posts')
+    axios.get('https://dummyjson.com/posts')
       .then(res => {
         setPosts(res.data.posts);
         setLoading(false);
@@ -34,7 +26,7 @@ const Home: React.FC = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [isAuthenticated, router]);
+  }, []);
 
   const sportPosts = getElementByTag(posts, 'fiction');
   const englishPosts = getElementByTag(posts, 'english');
