@@ -21,15 +21,16 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     if (savedTheme) {
       setIsDark(savedTheme === 'dark');
     }
-}, []);
+  }, []);
 
   const toggleTheme = () => {
     setIsDark((prevIsDark) => {
       const newTheme = !prevIsDark;
       localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', newTheme);
       return newTheme;
     });
-};
+  };
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>

@@ -6,6 +6,7 @@ import Navbar from './components/layout/Navbar';
 import CardPost from './components/Card/CardPost';
 import AsideCard from './components/Card/AsideCard';
 import Spinner from './components/Animations/Spinner';
+import ThemeToggle from './components/Button/ThemeToggle';
 import { Post } from './types';
 
 const getElementByTag = (posts: Post[], tag: string): Post[] => {
@@ -34,15 +35,18 @@ const Home: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-center items-center">
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
       <Navbar />
+      <div className="flex justify-end p-4">
+        <ThemeToggle />
+      </div>
       <main className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-11">
           {/* Main Content */}

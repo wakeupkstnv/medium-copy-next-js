@@ -1,4 +1,3 @@
-// components/ThemeToggle.tsx
 import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -8,9 +7,16 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded"
+      className="p-2 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded transition-colors duration-300 focus:outline-none"
     >
-      {isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      <div className="w-6 h-6 relative">
+        <div className={`absolute inset-0 transition-opacity duration-300 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
+        🌙
+        </div>
+        <div className={`absolute inset-0 transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
+        ☀️ 
+        </div>
+      </div>
     </button>
   );
 };

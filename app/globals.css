@@ -45,3 +45,13 @@ body {
     transform: rotate(360deg);
   }
 }
+
+html.dark {
+  background: #000;
+  color: #fff;
+}
+
+html.light {
+  background: #fff;
+  color: #000;
+}
